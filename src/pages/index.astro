@@ -107,6 +107,11 @@ import PlayButton from "../components/PlayButton.astro";
         deleteButton.className =
           "px-3 ml-20 text-xl font-title border border-gray-900 text-gray-200 bg-red-500 rounded-3xl hover:bg-red-800 cursor-pointer focus:outline-none";
         deleteButton.addEventListener("click", () => {
+          //remove the name from the array
+          const index = namesArray.indexOf(formattedName);
+          if(index > -1) {
+            namesArray.splice(index, 1);
+          }
           nameList.removeChild(newName);
         });
         newName.appendChild(deleteButton);
