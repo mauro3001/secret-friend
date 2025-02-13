@@ -2,6 +2,9 @@
 
 This project is an interactive application designed to facilitate the process of organizing a **Secret Friend** event. It allows users to manually add their friends' names, randomly select a name, and, if necessary, remove names if someone decides to back out or if a mistake was made while adding a name.
 
+![image](https://github.com/user-attachments/assets/bcc085e2-e369-4394-8402-9ad57f9be630)
+
+
 ## Features:
 
 - **Add Friends**: Users can type their friend's name in an input field and add it to the list of Secret Friend participants.
