@@ -28,12 +28,8 @@ jobs:
         with:
           node-version: lts/*
 
-      # Instalar pnpm
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Install Dependencies
-        run: "pnpm install"
+      - name: Install step
+        run: "npm install -g pnpm"
 
       - name: Build step
         run: "pnpm run build"
