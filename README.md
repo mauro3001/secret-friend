@@ -1,3 +1,14 @@
+# Project Description
+
+This project is an interactive application designed to facilitate the process of organizing a **Secret Friend** event. It allows users to manually add their friends' names, randomly select a name, and, if necessary, remove names if someone decides to back out or if a mistake was made while adding a name.
+
+## Features:
+
+- **Add Friends**: Users can type their friend's name in an input field and add it to the list of Secret Friend participants.
+- **Remove Friends**: If a user decides to remove someone from the list, they can do so with a "Delete" button next to the name.
+- **Draw Secret Friends**: Once all names are added, the system can randomly assign Secret Friend matches, ensuring that each participant is paired with another.
+- **Interactive Interface**: The system is easy to use, with clear buttons to add and delete friends. Additionally, the friend list updates in real-time.
+
 # Astro Starter Kit: Basics
 
 ```sh
