@@ -42,7 +42,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "secret-friend-alura"
-          entrypoint: "dist/index.html"
+          entrypoint: "index.html"
           root: "dist"
           
           
