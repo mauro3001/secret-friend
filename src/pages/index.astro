@@ -1,0 +1,142 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Input from "../components/Input.astro";
+import Button from "../components/Button.astro";
+import PlayButton from "../components/PlayButton.astro";
+---
+
+<Layout>
+  <div class="flex flex-col min-h-full">
+    <div class="max-w-7xl mx-auto pt-10">
+      <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
+        <div class="grid place-content-center">
+          <h1
+            class="text-6xl font-bold font-title text-white text-center items-center italic"
+          >
+            Amigo Secreto
+          </h1>
+        </div>
+        <img
+          class="w-full object-cover"
+          alt="Persona eligiendo amigo secreto"
+          src="/src/assets/amigo-secreto.png"
+        />
+      </div>
+    </div>
+    <div class="border-2 border-black pt-5 rounded-t-4xl bg-secondary flex-1">
+      <h2 class="text-4xl font-bold font-title text-primary text-center p-10">
+        Digite el nombre de sus amigos
+      </h2>
+
+      <!-- Define Input Component -->
+      <div class="flex items-center justify-center">
+        <div class="max-w-sm w-full md:max-w-xl">
+          <div class="flex">
+            <input
+              type="text"
+              id="inputName"
+              class="w-full bg-white border-2 border-gray-950 text-gray-950 text-xl rounded-4xl focus:outline-none py-3 px-5"
+              placeholder="Escribe un nombre..."
+            />
+            <button
+              id="addNameButton"
+              type="button"
+              class="px-5 ms-2 text-lg font-medium border-2 font-title border-gray-950 text-gray-950 bg-gray-300 rounded-4xl hover:bg-orange-200 cursor-pointer focus:outline-none"
+            >
+              Añadir
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logic about names list -->
+      <div
+        id="nameList"
+        class="grid place-content-center text-2xl font-semibold font-title m-5"
+      >
+      </div>
+      <!-- Logic about random button -->
+
+      <div id="randomButton" class="max-w-[250px] mx-auto">
+        <div
+          class="flex justify-center p-2 items-center gap-2 border-2 rounded-3xl bg-button hover:bg-button-hover cursor-pointer"
+        >
+          <PlayButton />
+          <p class="font-title text-2xl text-white">Sortear amigo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  //Logic to get names from input and show them in the list
+  const button = document.getElementById("addNameButton") as HTMLButtonElement;
+  const input = document.getElementById("inputName") as HTMLInputElement;
+  const nameList = document.getElementById("nameList") as HTMLUListElement;
+
+  //Array to store names
+  const namesArray: string[] = [];
+
+  //Regular expression to validate names
+  const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/;
+
+  if (button) {
+    button.addEventListener("click", () => {
+      //Validate and put correct format to names
+      const correctName = input.value.trim();
+      if (correctName && nameRegex.test(correctName)) {
+        const formattedName = correctName
+          .split(" ")
+          .map(
+            (name) =>
+              name.charAt(0).toUpperCase() + name.slice(1).toLocaleLowerCase()
+          )
+          .join(" ");
+
+        namesArray.push(formattedName);
+
+        //Create a new div to work with names
+        const newName = document.createElement("div");
+        newName.textContent = formattedName;
+        newName.className = "flex items-center justify-between py-2";
+
+        //Add button to delete name
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Borrar";
+        deleteButton.className =
+          "px-3 ml-20 text-xl font-title border border-gray-900 text-gray-200 bg-red-500 rounded-3xl hover:bg-red-800 cursor-pointer focus:outline-none";
+        deleteButton.addEventListener("click", () => {
+          nameList.removeChild(newName);
+        });
+        newName.appendChild(deleteButton);
+
+        nameList.appendChild(newName);
+
+        input.value = "";
+      } else {
+        alert("Por favor, digite un nombre correcto");
+        input.value = "";
+      }
+    });
+  }
+
+  //Logic to get a random name from the list
+  const randomButton = document.getElementById(
+    "randomButton"
+  ) as HTMLButtonElement;
+  if(randomButton) {
+    randomButton.addEventListener("click", () => {
+      if (namesArray.length > 0 && nameList.children.length >  0) {
+        const randomIndex = Math.floor(Math.random() * namesArray.length);
+        alert(`Tu amigo secreto es: ${namesArray[randomIndex]}`);
+
+        nameList.innerHTML = "";
+        namesArray.length = 0;
+        location.reload();
+      } else {
+        alert("Por favor, añada al menos un nombre");
+      }
+    });
+  }
+</script>
